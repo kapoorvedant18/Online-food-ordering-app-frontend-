@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Food Ordering App - Your Orders</title>
+    <title>Online Food Ordering App - Feedback</title>
 </head>
-<body style ="height: 100%; margin : 0;">
-    <div style ="height: 100%; display: flex;">
-
+<body style = "height : 100%; margin : 0">
+    <div style = "height : 100%; display : flex;">
         <div id="Side Bar" style ="border-right : 2pt solid black ; width : 20%; height : 100%; margin-right : 5pt">
             <img id = "logo">
             <p onclick="window.location.href='dashboard.html'">Home</p>
@@ -21,15 +20,17 @@
         </div>
 
         <div>
-            <header>
-            <img src="logo.png">
-            <h1>Your Orders</h1>
-            </header>
-            <div id="orders">
-
-            </div>
+            <h1>Feedback</h1>
+            <form action="">
+                <input type="text" id="fname" name="name" placeholder="Your Name"><br><br>
+                <input type="email" id="email" name="email" placeholder="Your Email"><br><br>
+                <input type="number" id="Phone number" placeholder="Phone Number"><br><br>
+                <label for="feedback">Your Feedback:</label><br>
+                <textarea id="feedback" name="feedback" rows="4" cols="50"></textarea><br>
+                <input type="submit" value="Submit">
+            </form>
         </div>
-
     </div>
+    
 </body>
 </html>

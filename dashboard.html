@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" style ="height: 100%;">
+<html lang="en" style = "height : 100%;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Food Ordering App - Your Orders</title>
+    <title>Online food ordering app</title>
+    <script src="main.js"></script>
+    
 </head>
-<body style ="height: 100%; margin : 0;">
-    <div style ="height: 100%; display: flex;">
-
-        <div id="Side Bar" style ="border-right : 2pt solid black ; width : 20%; height : 100%; margin-right : 5pt">
+<body style = "height : 100%; margin : 0" onload="initialization()">
+    <div style = "height : 100%; display : flex;">
+        <div id="Side Bar" style ="border-right : 2pt solid black ; width : 20%; height : 100%; margin-right : 5pt;">
             <img id = "logo">
             <p onclick="window.location.href='dashboard.html'">Home</p>
             <p onclick="window.location.href='Account_page.html'">Account</p>
@@ -20,16 +21,9 @@
             <button onclick="logout()">Logout</button>
         </div>
 
-        <div>
-            <header>
-            <img src="logo.png">
-            <h1>Your Orders</h1>
-            </header>
-            <div id="orders">
-
-            </div>
+        <div id="menu">
+                
         </div>
-
     </div>
 </body>
 </html>

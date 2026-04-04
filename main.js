@@ -1,4 +1,3 @@
-let i = 0;
 let cart = [];
 
 let initialization = function() {
@@ -10,26 +9,37 @@ let initialization = function() {
                 let image = document.createElement("img");
                 image.src = items.image
                 image.style.width = "200px";
+                let price = document.createElement("p");
+                price.innerHTML = "10 $";
+                let rating = document.createElement("p");
+                rating.innerHTML = "Rating : " + items.rating;
+                let reviews = document.createElement("p");
+                reviews.innerHTML = "Reviews : " + items.reviewCount;
+                let tags = document.createElement("p");
+                tags.innerHTML = "Tags : " + items.tags.join(", ");
                 let addContainer = document.createElement("div");
-                addContainer.id = i;
+                addContainer.id = items.id;
                 let addButton = document.createElement("button");
                 addButton.innerHTML = "Add to Cart";
-                let id = i;
-                addButton.id = "addbutton" + id;
-                addButton.onclick = ()=> {addToCart(items,id)};
+                addButton.id = "addbutton" + items.id;
+                addButton.onclick = ()=> {addToCart(items.id)};
                 addContainer.appendChild(addButton);
-                let itemContainer = document.createElement("div"); 
+                let itemContainer = document.createElement("div");
+                itemContainer.id = "itemcontainer"; 
                 itemContainer.appendChild(image);
                 itemContainer.appendChild(item);
+                itemContainer.appendChild(price);
+                itemContainer.appendChild(rating);
+                itemContainer.appendChild(reviews);
+                itemContainer.appendChild(tags);
                 itemContainer.appendChild(addContainer);
                 itemContainer.style.display = "flex";
                 document.getElementById("menu").appendChild(itemContainer);
-                i++;
         })
     })  
 }
 
-function addToCart(items,id) {
+function addToCart(id) {
     document.getElementById("addbutton"+id).style.display = "none";
     let addcounter = document.createElement("p");
     let plus = document.createElement("button");
@@ -41,6 +51,101 @@ function addToCart(items,id) {
     document.getElementById(id).appendChild(addcounter);
     document.getElementById(id).appendChild(minus);
     document.getElementById(id).style.display = "inline-block";
-    cart.push(id);
+    cart.push({itemid : id, quantity : 1,price : 10});
+    plus.onclick = () => {
+        let item = cart.findIndex((item) => item.itemid === id);
+        cart[item].quantity++;
+        addcounter.innerHTML = cart[item].quantity;
+        console.log(cart);
+    }
+    minus.onclick = () => {
+        let item = cart.findIndex((item) => item.itemid === id);
+        if (cart[item].quantity > 0) {
+            cart[item].quantity--;
+            addcounter.innerHTML = cart[item].quantity;
+        }
+        if (cart[item].quantity === 0) {
+            plus.style.display = "none";
+            minus.style.display = "none";
+            addcounter.style.display = "none";
+            document.getElementById("addbutton"+id).style.display = "";
+        }
+        console.log(cart);
+    }
     console.log(cart);
+}
+
+function searchItems() {
+    let searchquery = document.getElementById("search").value;
+    
+    if (searchquery != "") {
+        
+    document.getElementById("menu").innerHTML = "";
+    fetch('https://dummyjson.com/recipes/search?q='+searchquery).
+    then(response => response.json()).then(data => {
+        data.recipes.forEach(items => {
+            console.log(items);
+             let item = document.createElement("p");
+            item.innerHTML = items.name;
+            let image = document.createElement("img");
+            image.src = items.image
+            image.style.width = "200px";
+            let price = document.createElement("p");
+            price.innerHTML = "10 $";
+             let addContainer = document.createElement("div");
+                addContainer.id = items.id;
+                let addButton = document.createElement("button");
+                addButton.innerHTML = "Add to Cart";
+                addButton.id = "addbutton" + items.id;
+                addButton.onclick = ()=> {addToCart(items.id)};
+                addContainer.appendChild(addButton);
+                let itemContainer2 = document.createElement("div");
+                itemContainer2.id = "itemcontainer2"; 
+                itemContainer2.appendChild(image);
+                itemContainer2.appendChild(item);
+                itemContainer2.appendChild(price);
+                itemContainer2.appendChild(addContainer);
+                itemContainer2.style.display = "flex";
+                document.getElementById("menu").appendChild(itemContainer2);
+    })
+})
+    }else{
+        document.getElementById("menu").innerHTML = "";
+        initialization();}
+}
+
+function showCart() {
+    cart.forEach(items => {
+        fetch('https://dummyjson.com/recipes/'+items.itemid).then(response => response.json()).
+        then(cartitem=>{
+                let item = document.createElement("p");
+                item.innerHTML = cartitem.name;
+                let image = document.createElement("img");
+                image.src = cartitem.image
+                image.style.width = "200px";
+                let price = document.createElement("p");
+                price.innerHTML = "10 $";
+                let tags = document.createElement("p");
+                tags.innerHTML = "Tags : " + cartitem.tags.join(", ");
+                let quantity = document.createElement("p");
+                let plus = document.createElement("button");
+                let minus = document.createElement("button");
+                plus.innerHTML = "+";
+                minus.innerHTML = "-";
+                quantity.innerHTML =  + cartitem.quantity;
+                let cartitemstatus = document.createElement("div");
+                cartitemstatus.id = "cartitemstatus";
+                cartitemstatus.appendChild(plus);
+                cartitemstatus.appendChild(quantity);
+                cartitemstatus.appendChild(minus);
+                let cartitems = document.createElement("div");
+                cartitems.appendChild(item);
+                cartitems.appendChild(image);
+                cartitems.appendChild(price);
+                cartitems.appendChild(tags);
+                cartitems.appendChild(cartitemstatus);
+                document.getElementById("cart_items").appendChild(cartitems);
+        })
+    })
+
 }

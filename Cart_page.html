@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Food Ordering App - Cart</title>
+    <script src="main.js"></script>
 </head>
-<body style ="height: 100%; margin : 0;">
+<body style ="height: 100%; margin : 0;" onload="showCart()">
     <div style ="height: 100%; display: flex;">
 
         <div id="Side Bar" style ="border-right : 2pt solid black ; width : 20%; height : 100%; margin-right : 5pt">
@@ -25,6 +26,9 @@
             <img src="logo.png">
             <h1>Your Cart</h1>
             </header>
+            <div id="cart_items"">
+
+            </div>
         </div>
 
     </div>         

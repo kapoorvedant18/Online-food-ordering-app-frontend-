@@ -56,7 +56,6 @@ function addToCart(id) {
         let item = cart.findIndex((item) => item.itemid === id);
         cart[item].quantity++;
         addcounter.innerHTML = cart[item].quantity;
-        console.log(cart);
     }
     minus.onclick = () => {
         let item = cart.findIndex((item) => item.itemid === id);
@@ -70,21 +69,20 @@ function addToCart(id) {
             addcounter.style.display = "none";
             document.getElementById("addbutton"+id).style.display = "";
         }
-        console.log(cart);
     }
-    console.log(cart);
 }
-
+let currentController = null;   
 function searchItems() {
     let searchquery = document.getElementById("search").value;
+
+      if (currentController) currentController.abort();
+    currentController = new AbortController();
     
     if (searchquery != "") {
-        
     document.getElementById("menu").innerHTML = "";
-    fetch('https://dummyjson.com/recipes/search?q='+searchquery).
+    fetch('https://dummyjson.com/recipes/search?q='+searchquery , { signal: currentController.signal }).
     then(response => response.json()).then(data => {
         data.recipes.forEach(items => {
-            console.log(items);
              let item = document.createElement("p");
             item.innerHTML = items.name;
             let image = document.createElement("img");
@@ -92,6 +90,12 @@ function searchItems() {
             image.style.width = "200px";
             let price = document.createElement("p");
             price.innerHTML = "10 $";
+                let rating = document.createElement("p");
+                rating.innerHTML = "Rating : " + items.rating;
+                let reviews = document.createElement("p");
+                reviews.innerHTML = "Reviews : " + items.reviewCount;
+                let tags = document.createElement("p");
+                tags.innerHTML = "Tags : " + items.tags.join(", ");
              let addContainer = document.createElement("div");
                 addContainer.id = items.id;
                 let addButton = document.createElement("button");
@@ -104,35 +108,41 @@ function searchItems() {
                 itemContainer2.appendChild(image);
                 itemContainer2.appendChild(item);
                 itemContainer2.appendChild(price);
+                itemContainer2.appendChild(rating);
+                itemContainer2.appendChild(reviews);
+                itemContainer2.appendChild(tags);
                 itemContainer2.appendChild(addContainer);
                 itemContainer2.style.display = "flex";
                 document.getElementById("menu").appendChild(itemContainer2);
     })
 })
+
     }else{
         document.getElementById("menu").innerHTML = "";
-        initialization();}
+        initialization();
+    }
 }
 
 function showCart() {
+    localStorage.setItem("cart", JSON.stringify(cart)); 
     cart.forEach(items => {
         fetch('https://dummyjson.com/recipes/'+items.itemid).then(response => response.json()).
         then(cartitem=>{
                 let item = document.createElement("p");
-                item.innerHTML = cartitem.name;
+                item.innerHTML = cartitem.recipes.name;
                 let image = document.createElement("img");
-                image.src = cartitem.image
+                image.src = cartitem.recipes.image
                 image.style.width = "200px";
                 let price = document.createElement("p");
                 price.innerHTML = "10 $";
                 let tags = document.createElement("p");
-                tags.innerHTML = "Tags : " + cartitem.tags.join(", ");
+                tags.innerHTML = "Tags : " + cartitem.recipes.tags.join(", ");
                 let quantity = document.createElement("p");
                 let plus = document.createElement("button");
                 let minus = document.createElement("button");
                 plus.innerHTML = "+";
                 minus.innerHTML = "-";
-                quantity.innerHTML =  + cartitem.quantity;
+                quantity.innerHTML =  cartitem.recipes.quantity;
                 let cartitemstatus = document.createElement("div");
                 cartitemstatus.id = "cartitemstatus";
                 cartitemstatus.appendChild(plus);

@@ -67,6 +67,7 @@ function addToCart(id,push) {
     document.getElementById("addbutton"+id).style.display = "none";
     if (push === true) {
     users[currentUserIndex].cart.push({itemid : id, quantity : 1,price : 10});
+    localStorage.setItem("users", JSON.stringify(users));
     console.log(users[currentUserIndex]);
     //localStorage.setItem("", JSON.stringify(cart));
     }
@@ -380,8 +381,6 @@ function register(){
 
 function login(){
     users = JSON.parse(localStorage.getItem("users")) || [];
-    const element = document.getElementsByTagName("p")[0];
-    element.remove();
 
     let useremail = document.getElementById("email").value;
     let userpassword = document.getElementById("password").value;

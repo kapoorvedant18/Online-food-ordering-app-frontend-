@@ -1,0 +1,62 @@
+body{
+    background-image: url(login_background.jpg);
+    background-size: cover;
+    background-position: center;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    background-color: white;
+    width: 450px;
+    height: 330px;
+    text-align: center;
+    border-radius: 20px;
+    padding: 20px;
+    padding-bottom: 30px;
+    /* position :fixed;
+    top : 26%;
+    left : 33%; */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    background: rgba(255,255,255,0.9); 
+    backdrop-filter: blur(10px);
+    max-width: 90%;
+}
+input{
+    padding: 10px;
+    margin: 10px;
+    margin-bottom : 20px;
+    border-color: lightgrey;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 80%;
+    transition : 0.3s ease;
+}
+
+input:focus{
+    border-color: oklch(45.3% 0.124 130.933);
+    box-shadow: 0 0 0 4px rgba(80,180,80,0.2);
+    outline : none;
+}
+.btn{
+    background-color: oklch(45.3% 0.124 130.933);
+    padding: 10px 20px;
+    border-radius : 100px;
+    color : white;
+    font-size: larger;
+    font-weight: bolder;
+    transition : 0.25s ease;
+}
+.btn:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px rgba(80,180,80,0.2);
+}
+.btn:active{
+    transform: scale(0.98);
+    box-shadow: 0 4px 10px rgba(80,180,80,0.2);
+}

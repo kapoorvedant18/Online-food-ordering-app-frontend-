@@ -363,19 +363,21 @@ function register(){
         currentUserIndex = 0;
         localStorage.setItem("currentuserindex", JSON.stringify(currentUserIndex));
         localStorage.setItem("users", JSON.stringify(users));
+        ocument.getElementsByTagName("p")[0].innerHTML = "Registration successful!";
+        window.location = "dashboard.html";
+    }
+    else if (users.find((user)=> user.email === useremail)) {
+        document.getElementsByTagName("p")[0].innerHTML = "Email already registered. Please use a different email.";
+        setTimeout(() => {document.getElementsByTagName("p")[0].innerHTML = "Create an account to get started";}, 3000);
     }
     else {
         users.push({userid :users.length+1,email : useremail, password : userpassword ,cart : [], orders : []});
         currentUserIndex = users.length-1;
         localStorage.setItem("currentuserindex", JSON.stringify(currentUserIndex));
         localStorage.setItem("users", JSON.stringify(users));
+        document.getElementsByTagName("p")[0].innerHTML = "Registration successful!";
+        window.location = "dashboard.html";
     }
-
-    let registration_sucess_message = document.createElement("p");
-    registration_sucess_message.innerHTML = "Registration successful!";
-    document.getElementsByTagName("body")[0].appendChild(registration_sucess_message);
-
-    window.location = "dashboard.html";
 
 }
 
@@ -393,6 +395,7 @@ function login(){
     }
     else {
         document.getElementsByTagName("p")[0].innerHTML = "Invalid email or password. Please try again.";
+        setTimeout(() => {document.getElementsByTagName("p")[0].innerHTML = "Login to continue";}, 3000);
     }
     
 

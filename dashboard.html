@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online food ordering app</title>
     <script src="main.js"></script>
+    <link rel="stylesheet" href="dasstyle.css">
     
 </head>
 <body style = "height : 100%; margin : 0" onload="initialization()">
     <div style = "height : 100%; display : flex;">
-        <div id="Side Bar" style ="border-right : 2pt solid black ; width : 20%; height : 100%; margin-right : 5pt;">
+        <div class="sidebar">
             <img id = "logo">
             <p onclick="window.location.href='dashboard.html'">Home</p>
             <p onclick="window.location.href='Account_page.html'">Account</p>
@@ -21,7 +22,7 @@
             <button onclick="logout()">Logout</button>
         </div>
 
-        <div>
+        <div class = "main">
             <header style = "display : flex;">
                 <div>
                     <p>Menu</p>

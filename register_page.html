@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <script src="main.js"></script>
+    <link rel="stylesheet" href="log_reg_style.css">
 </head>
-<body style="height : 100%; margin : 0; background-image: url(login_background.jpg); background-size: cover; background-position: center;   ">
-    <div style = "height : 30% ; width : 40%; text-align: center;">
-    <h1>Register</h1>
+<body style="height : 100%; margin : 0;">
+    <div class = "container">
+    <h1>Welcome!</h1>
+    <p>Create an account to get started</p>
     <form action="" onsubmit="event.preventDefault(); register();">
         <input type = "email" id="email" placeholder="Type in your email" required/><br/>
         <input type = "password" id="password" placeholder="Type your password" required/><br/>
-        <input type= "submit" value = "Register"/>
-        <p></p>
+        <input type= "submit" value = "Register" class = "btn"/>
     </form>
     </div>
 </body>

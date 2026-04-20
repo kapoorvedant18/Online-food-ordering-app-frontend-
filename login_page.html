@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login    </title>
     <script src="main.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
+    <link rel="stylesheet" href="log_reg_style.css">
 </head>
-<body>
-    <div>
-    <h1>Login</h1>
+<body style="height : 100%; margin : 0;">
+    <div class = "container">
+    <h1>Welcome Back!</h1>
+    <p>login to continue</p>
     <form action="" onsubmit="event.preventDefault();login();">
-        <input type = "email" id="email" placeholder="Type in your email" required/><br/>
-        <input type = "password" id="password" placeholder="Type your password" required/><br/>
+        <input type = "email" id="email" placeholder="Email" required/><br/>
+        <input type = "password" id="password" placeholder="Password" required/><br/>
         <a href="forgot_password.html">forgot password?</a><br/>
-        <input type= "submit" value = "login"/>
-        <p></p>
+        <input type= "submit" value = "Login" class = "btn"/>
     </form>
     </div>
 </body>

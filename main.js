@@ -33,7 +33,7 @@ let initialization = function() {
                 addButton.onclick = ()=> {addToCart(items.id,true)};
                 addContainer.appendChild(addButton);
                 let itemContainer = document.createElement("div");
-                itemContainer.id = "itemcontainer"; 
+                itemContainer.className = "card"; 
                 itemContainer.appendChild(image);
                 itemContainer.appendChild(item);
                 itemContainer.appendChild(price);
